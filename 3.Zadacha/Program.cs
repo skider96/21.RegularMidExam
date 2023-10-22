@@ -30,31 +30,38 @@ namespace _3.Zadacha
 
             whichItemToRemove(rightSum, typeOfItems, priceRating, entryPoint);
             whichItemToRemove(leftSum, typeOfItems, priceRating, entryPoint);
-
+            List<string> name = Console.ReadLine()
+                .Split()
+           
+                .ToList();
+            
+            direction[0] = "Left";
+            direction[1] = "Right";
             if (rightSum.Sum() > leftSum.Sum())
             {
-                whatToPrint(rightSum, priceRating, entryPoint, typeOfItems, leftSum);
-
+                whatToPrint(rightSum, priceRating, entryPoint, typeOfItems, direction, leftSum);
             }
             else if (rightSum.Sum() <= leftSum.Sum())
             {
-                whatToPrint(leftSum, priceRating, entryPoint, typeOfItems, rightSum);
+                whatToPrint(leftSum, priceRating, entryPoint, typeOfItems, direction, rightSum);
             }
         }
 
-        private static void whatToPrint(List<int> leftOrRightSum, List<int> priceRating, int entryPoint, string? typeOfItems, List<int> rightOrLeftSum)
+
+        private static void whatToPrint(List<int> rightSum, List<int> priceRating, int entryPoint, string? typeOfItems,
+            string[] direction, List<int> leftSum)
         {
-            if (leftOrRightSum.Sum() > priceRating[entryPoint] && typeOfItems == "cheap")
+            if (rightSum.Sum() > priceRating[entryPoint] && typeOfItems == "cheap")
             {
-                Console.WriteLine($"Left - {rightOrLeftSum.Sum()}");
+                Console.WriteLine($"{direction[0]} - {leftSum.Sum()}");
             }
-            else if (leftOrRightSum.Sum() <= priceRating[entryPoint] && typeOfItems == "expensive")
+            else if (rightSum.Sum() <= priceRating[entryPoint] && typeOfItems == "expensive")
             {
-                Console.WriteLine($"Left - {rightOrLeftSum.Sum()}");
+                Console.WriteLine($"{direction[0]} - {leftSum.Sum()}");
             }
             else
             {
-                Console.WriteLine($"Right - {leftOrRightSum.Sum()}");
+                Console.WriteLine($"{direction[1]} - {rightSum.Sum()}");
             }
         }
 
